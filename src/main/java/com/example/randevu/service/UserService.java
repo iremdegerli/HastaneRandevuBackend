@@ -13,7 +13,6 @@ public interface UserService {
     User saveUser(User user);
     Optional<User> findById(Long id);
     boolean validateUser(String email, String password);
-    boolean identityNumberExists(String identityNumber);
-    boolean emailExists(String email);
     List<User> findDoctorsBySpecialty(Long specialtyId);
+    boolean identityNumberExists(String identityNumber);
 }
