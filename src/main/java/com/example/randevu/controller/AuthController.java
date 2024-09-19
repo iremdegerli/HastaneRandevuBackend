@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/auth")
@@ -40,4 +43,21 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }
+    @GetMapping("/check-identity/{identityNumber}")
+    public ResponseEntity<Map<String, Boolean>> checkIdentityNumberExists(@PathVariable String identityNumber) {
+        boolean exists = userService.identityNumberExists(identityNumber);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("exists", exists);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/check-email/{email}")
+    public ResponseEntity<Map<String, Boolean>> checkEmailExists(@PathVariable String email) {
+        boolean exists = userService.emailExists(email);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("exists", exists);
+        return ResponseEntity.ok(response);
+    }
+
+
 }

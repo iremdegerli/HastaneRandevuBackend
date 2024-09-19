@@ -94,9 +94,16 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-
     @Override
     public List<User> findDoctorsBySpecialty(Long specialtyId) {
         return userRepository.findBySpecialtyId(specialtyId);
     }
+    @Override public boolean identityNumberExists(String identityNumber) {
+        return userRepository.existsByIdentityNumber(identityNumber);
+    }
+
+    @Override public boolean emailExists(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
 }
